@@ -5,11 +5,12 @@ import com.contactBooks.models.InfoReadOnly;
 
 import java.util.UUID;
 
-public interface ContactMethodBlueprint {
+public interface ContactMethodBlueprint<T,Y> {
 
-    void deleteContact(UUID uuid);
+    void deleteContact(T t);
 
-    boolean updateContact(UUID uuid);
+    boolean updateContact(T t,Y y);
 
+    void saveRecordToaFile();
 
 }

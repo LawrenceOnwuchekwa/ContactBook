@@ -4,8 +4,7 @@ import com.contactBooks.Enum.Gender;
 
 import java.util.UUID;
 
-public interface InfoReadOnly {
-    int getId();
+public interface InfoReadOnly<T> {
 
     UUID getUuid();
 
@@ -23,4 +22,6 @@ public interface InfoReadOnly {
 
     @Override
     String toString();
+
+
 }
