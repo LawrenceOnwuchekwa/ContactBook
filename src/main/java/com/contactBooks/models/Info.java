@@ -6,89 +6,63 @@ import com.contactBooks.utility.UUIDGenerator;
 import java.io.Serializable;
 import java.util.UUID;
 
-public class Info implements InfoReadOnly, Serializable {
+public class Info implements InfoReadOnly {
 
-    private int id;
-    private UUID uuid;
-    private String name;
+    //Builder Pattern
+    private final UUID uuid;
+    private final String name;
 
-    private String phoneNumber;
+    private final String phoneNumber;
 
-    private Gender gender;
+    private final Gender gender;
 
-    private byte age;
+    private final byte age;
 
-    private String email;
+    private final String email;
 
-    private String address;
+    private final String address;
 
-    public Info() {
-        this.uuid = UUID.randomUUID();
+
+    private Info(Builder builder) {
+        this.uuid = builder.uuid != null ? builder.uuid : UUID.randomUUID(); ;
+        this.name = builder.name;
+        this.phoneNumber = builder.phoneNumber;
+        this.gender = builder.gender;
+        this.age = builder.age;
+        this.email = builder.email;
+        this.address = builder.address;
     }
 
-    public Info(int id, UUID uuid, String name, String phoneNumber, Gender gender, byte age, String email, String address) {
-        this.id = id;
-        this.uuid = uuid != null ? uuid : UUID.randomUUID(); ;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.gender = gender;
-        this.age = age;
-        this.email = email;
-        this.address = address;
-    }
 
-    @Override
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @Override
     public UUID getUuid() {
         return uuid;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
 
     @Override
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     @Override
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
     @Override
     public Gender getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
 
     @Override
     public byte getAge() {
         return age;
-    }
-
-    public void setAge(byte age) {
-        this.age = age;
     }
 
     @Override
@@ -96,23 +70,16 @@ public class Info implements InfoReadOnly, Serializable {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     @Override
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     @Override
     public String toString() {
         return "Info{" +
-                "id=" + id +
                 ", uuid=" + uuid +
                 ", name='" + name + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
@@ -122,4 +89,66 @@ public class Info implements InfoReadOnly, Serializable {
                 ", address='" + address + '\'' +
                 '}';
     }
+
+
+    //Using the builder pattern
+
+    public static class Builder{
+        private UUID uuid;
+        private String name;
+
+        private String phoneNumber;
+
+        private Gender gender;
+
+        private byte age;
+
+        private String email;
+
+        private String address;
+
+        public Builder() {
+            this.uuid = UUID.randomUUID();
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+
+        public Builder setPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public Builder setGender(Gender gender) {
+            this.gender = gender;
+            return this;
+        }
+
+        public Builder setAge(byte age) {
+            this.age = age;
+            return this;
+        }
+
+        public Builder setEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder setAddress(String address) {
+            this.address = address;
+            return this;
+        }
+
+        public Info build(){
+            return new Info(this);
+        }
+
+
+    }
+
+
+
 }
