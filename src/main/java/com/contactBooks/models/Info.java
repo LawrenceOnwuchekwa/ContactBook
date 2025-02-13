@@ -3,9 +3,10 @@ package com.contactBooks.models;
 import com.contactBooks.Enum.Gender;
 import com.contactBooks.utility.UUIDGenerator;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Info implements InfoReadOnly {
+public class Info implements InfoReadOnly, Serializable {
 
     private int id;
     private UUID uuid;
